@@ -1,0 +1,23 @@
+capm3Capm3FasttrackConfigmap:
+  capm3FastTrack: false
+capm3ControllerManager:
+  manager:
+    image:
+      repository: quay.io/metal3-io/cluster-api-provider-metal3
+      tag: v1.3.0
+capm3WebhookService:
+  ports:
+  - port: 443
+    targetPort: webhook-server
+  type: ClusterIP
+ipamControllerManager:
+  manager:
+    image:
+      repository: quay.io/metal3-io/ip-address-manager
+      tag: v1.3.0
+ipamWebhookService:
+  ports:
+  - port: 443
+    targetPort: ipam-webhook
+  type: ClusterIP
+kubernetesClusterDomain: cluster.local

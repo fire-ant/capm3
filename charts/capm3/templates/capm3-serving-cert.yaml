@@ -1,0 +1,15 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: {{ include "capm3.fullname" . }}-capm3-serving-cert
+  labels:
+  {{- include "capm3.labels" . | nindent 4 }}
+spec:
+  dnsNames:
+  - '{{ include "capm3.fullname" . }}-capm3-webhook-service.{{ .Release.Namespace }}.svc'
+  - '{{ include "capm3.fullname" . }}-capm3-webhook-service.{{ .Release.Namespace }}.svc.{{
+    .Values.kubernetesClusterDomain }}'
+  issuerRef:
+    kind: Issuer
+    name: '{{ include "capm3.fullname" . }}-capm3-selfsigned-issuer'
+  secretName: capm3-webhook-service-cert
